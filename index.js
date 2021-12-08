@@ -9,6 +9,25 @@ const server = express();
 server.use(express.json())
 server.use(morgan('dev'))
 
+server.post('/players', (req,res)=>{
+    const {firstName, lastName, username, age, city, season, country} = req.body;
+
+    try{
+        const newPlayer= await Player.create({
+            firstName,
+            lastName,
+            username,
+            age,
+            city,
+            season,
+            country
+        })
+        res.json(newPlayer)
+    }catch(e){
+        console.log(e);
+    }
+})
+
 server.listen(3000, () => {
     console.log('sever listing on port 3000')
     db.sync({force:true})
