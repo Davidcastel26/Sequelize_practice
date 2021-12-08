@@ -38,6 +38,9 @@ module.exports = sequelize => {
            return`${this.firstName} ${this.lastName}`
        }
    },
+   season:{
+       type: DataTypes.ENUM("winter","summer")
+   },
    country:{
        //accept only the elemtn into the ENUM
        type: DataTypes.ENUM('Guatemala','El Salvador','Belice','Nicaragua','Panama','Costa Rica','Honduras')

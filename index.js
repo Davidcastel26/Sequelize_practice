@@ -9,14 +9,14 @@ const server = express();
 server.use(express.json())
 server.use(morgan('dev'))
 
-server.post('/players', (req,res)=>{
-    const {firstName, lastName, username, age, city, season, country} = req.body;
+server.post('/players', async(req,res)=>{
+    const {firstName, lastName, userName, age, city, season, country} = req.body;
 
     try{
         const newPlayer= await Player.create({
             firstName,
             lastName,
-            username,
+            userName,
             age,
             city,
             season,
