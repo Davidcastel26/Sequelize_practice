@@ -30,5 +30,5 @@ server.post('/players', async(req,res)=>{
 
 server.listen(3000, () => {
     console.log('sever listing on port 3000')
-    db.sync({force:true})
+    db.sync({force:false})
 })
