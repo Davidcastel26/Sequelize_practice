@@ -1,4 +1,4 @@
-const {Sequelize, DataTypes} = require('sequelize');
+const {Sequelize, DataTypes, Model} = require('sequelize');
 
 
 // connect into a db 
@@ -39,4 +39,8 @@ const {Sequelize, DataTypes} = require('sequelize');
 
  });
 
+ //to create all the models in the db
 sequelize.sync({force:true}); 
+
+//if you would like just create one model follow the sintax below
+// await Model.sync({force:true})
