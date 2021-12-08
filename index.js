@@ -22,10 +22,10 @@ const {Sequelize, DataTypes} = require('sequelize');
     //  if we do not want to get the colums (CREATE_AT & UPDATE_AT) We could set timestamps as false or true if we would like to get it
     timestamps: true,//false
     //if we would like to set our owns names we could do as we are doing right below \\ seting the name with -> ''
-    createAt: 'Created',
+    createdAt: 'Created',
     //and we can chouse if one colum will be at the table or not like we are doing right below
-    updateAt: false
- })
+    updatedAt: false
+ });
 
  const Team = sequelize.define('Team',{
     code:{
@@ -37,6 +37,6 @@ const {Sequelize, DataTypes} = require('sequelize');
     }
  },{
 
- })
+ });
 
 sequelize.sync({force:true}); 
