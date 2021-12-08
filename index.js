@@ -1,5 +1,6 @@
-const {Sequelize, DataTypes} = require('sequelize');
+const {Sequelize} = require('sequelize');
 const modelPlayer = require('./Models/Player')
+const modelTeam = require('./Models/Team');
 
 // connect into a db 
  const sequelize =  new Sequelize('postgres://davidcastellanos:@localhost:5432/seq'/**we can create an obj here where we can delarte if we would like to get more option */,{
@@ -18,24 +19,16 @@ const modelPlayer = require('./Models/Player')
  //to confirm that you were able to conect with the local host
  sequelize.authenticate().then(()=>console.log('success')).catch(e=>console.log(e));
 
- modelPlayer(sequelize)
-
-//------------------------------------------------------------------
- const Team = sequelize.define('Team',{
-    code:{
-        type:DataTypes.UUID,
-        primaryKey: true
-    },
-    name:{
-        type:DataTypes.STRING
-    }
- },{
-
- });
+ //Tables
+ modelPlayer(sequelize);
+ modelTeam(sequelize);
+ //----------------------
 
 //  let p = Player.findByPk(1);
 //  P -> OBJ  => p = {FisrtName, lastNmae, age, .... fullName}
 // p.fullName ---> firstName lastaName
+
+console.log(sequelize.models);
 
  //to create all the models in the db
 sequelize.sync({force:true}); 
