@@ -30,6 +30,28 @@ server.post('/players', async(req,res)=>{
     }
 })
 
+server.get('/players', async (req, res)=>{
+    const {userName} = req.query;
+    try {
+        if(userName){
+            const players = await Player.findAll(
+                {
+                    where:{userName: userName}
+                } 
+            ) 
+            res.send(players.length > 0 ? players:'there is no one here')
+        }else{
+            //
+            const players = await Player.findAll();
+            res.send(players.length > 0 ? players: 'There are no players  ')
+        } 
+
+   } catch (error) {
+       console.log(error);
+   }
+
+})
+
 server.delete('/player', async(req,res)=>{
     // const jane = await User.create({name:"Jane"});
     // await jane.destroy()
