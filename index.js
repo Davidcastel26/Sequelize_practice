@@ -78,6 +78,10 @@ const {Sequelize, DataTypes, Model} = require('sequelize');
 
  });
 
+ let p = Player.findByPk(1);
+//  P -> OBJ  => p = {FisrtName, lastNmae, age, .... fullName}
+// p.fullName ---> firstName lastaName
+
  //to create all the models in the db
 sequelize.sync({force:true}); 
 
