@@ -1,4 +1,4 @@
-const {Sequelize} = require('sequelize');
+const {Sequelize, Op} = require('sequelize'); 
 const modelPlayer = require('./Models/Player')
 const modelTeam = require('./Models/Team');
 
@@ -42,6 +42,7 @@ const {Player, Team} = sequelize.models;
 // await Model.sync({force:true})
 
 module.exports = {
+    Op,
     ...sequelize.models,
     db: sequelize
 }

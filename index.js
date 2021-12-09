@@ -1,6 +1,8 @@
 const express = require('express');
 const morgan = require('morgan')
-const {db, Player, Team} = require('./db')
+const {db, Player, Op, Team} = require('./db')
+//Op -> and or eq 
+
 
 // db.sync({force:false}); 
 
@@ -31,17 +33,27 @@ server.post('/players', async(req,res)=>{
 })
 
 server.get('/players', async (req, res)=>{
-    const {userName} = req.query;
+    const {userName, lastName} = req.query;
     try {
-        if(userName){
+        if(userName && lastName){
+            //we are saying here that give me only the data from the usernama that it is into the db
             const players = await Player.findAll(
-                {
-                    where:{userName: userName}
+                {   
+                    // SELECT firstName, birthday, userName FROM "Players" WHERE firstName = name AND lastName=lastName;
+                    // here we are setting the attributes from the player, only the attributes from here will show up in the request
+                    attributes:['firstName','birthday','userName'],
+                    //get the userName 
+                    where:{
+                        [Op.and]:[
+                            {firstName:userName},
+                            {lastName:lastName}
+                        ]
+                    }
                 } 
             ) 
             res.send(players.length > 0 ? players:'there is no one here')
         }else{
-            //
+            //we are saying here, give me all the players in the db
             const players = await Player.findAll();
             res.send(players.length > 0 ? players: 'There are no players  ')
         } 
