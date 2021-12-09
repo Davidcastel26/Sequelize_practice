@@ -95,9 +95,27 @@ server.get('/player/:id', async (req, res)=>{
 //     }
 // })
 
-server.delete('/player', async(req,res)=>{
+
+server.put('player/:name', async(req,res)=>{
+    const {name} = req.params;
+    const player = await Player.update({
+        firstName:'david'
+    },{
+        where:{
+            firstName: name
+        }
+    })
+    res.send(player)
+})
+
+server.delete('/player/:name', async(req,res)=>{
     // const jane = await User.create({name:"Jane"});
     // await jane.destroy()
+    let {name} = req.params;
+    const player = await Player.destroy({
+        where:{firstName:name}
+    })
+    res.send(player)
 }) 
 
 server.listen(3000, () => {
@@ -163,5 +181,33 @@ const [instance, created]= await Model.findOrCreate({
 });
 
 
+
+
+OPERATORS
+
+//-- BASICS --
+[Op.eq]: 3      // === 3
+[Op.ne]: 20     // != 20
+[Op.is]: null   // IS NULL
+[Op.not]:true   // IS NOT NULL
+
+//-- Number comparasions --
+[Op.gt]: 6              // > 6
+[Op.lt]: 10             // < 10
+[Op.between]:[6,10]     // BETWEEN 6 AND 10
+[Op.notBetween]:[11,15] // NOT BETWEEN 11 AND 15
+
+//-- Number comparasions --
+[Op.in]: 6              // IN[1,2]
+[Op.notIn]: 10          // NOT IN [1,2]
+
+
+UPDATE
+
+await User.update({ transformation: 'SS1},(
+    where:{
+        name:'Goku'
+    }
+))
 
 */
