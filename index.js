@@ -64,6 +64,16 @@ server.get('/players', async (req, res)=>{
 
 })
 
+server.get('/player/:id', async (req, res)=>{
+    const {id} = req.params;
+    try {
+                
+    } catch (error) {
+        res.send(e)
+    }
+})
+
+
 server.delete('/player', async(req,res)=>{
     // const jane = await User.create({name:"Jane"});
     // await jane.destroy()
