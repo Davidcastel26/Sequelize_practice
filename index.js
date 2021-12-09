@@ -67,7 +67,10 @@ server.get('/players', async (req, res)=>{
 server.get('/player/:id', async (req, res)=>{
     const {id} = req.params;
     try {
-                
+        //lookin by getting the primary key
+        const player = await Player.findByPk(id);
+        res.json(player ? player : 'There is no one here with that id please call 911 ASAP')
+
     } catch (error) {
         res.send(e)
     }
