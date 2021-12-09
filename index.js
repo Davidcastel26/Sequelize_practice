@@ -72,10 +72,28 @@ server.get('/player/:id', async (req, res)=>{
         res.json(player ? player : 'There is no one here with that id please call 911 ASAP')
 
     } catch (error) {
-        res.send(e)
+        res.send(error)
     }
 })
 
+// server.get('player/findOrCreate', async (req, res)=>{
+//     const {firstName, lastName, userName, season, country} = req.body;
+//     try{
+//         const [player, created] = await Player.findOrCreate({
+//             where:{userName: userName},
+//             defaults:{
+//                 firstName,
+//                 lastName,
+//                 userName,
+//                 season,
+//                 country
+//             }
+//         })
+//         res.json({created:created,player})
+//     }catch(err){
+//         console.log(err);
+//     }
+// })
 
 server.delete('/player', async(req,res)=>{
     // const jane = await User.create({name:"Jane"});
@@ -125,6 +143,25 @@ Model.findAll({
         ]
     }
 })
+
+
+QUERIES
+-finders
+
+const instance = await model.findByPk(4); // null if there is nothing in there
+
+const instance = await Model.findOne({
+    where:{name:'Dave'}
+}); // null if is unable to find it
+
+const [instance, created]= await Model.findOrCreate({
+    where: {name:'Goku'},
+    defaults:{
+        gender:'M',
+        race:'Saiyan'
+    }
+});
+
 
 
 */
